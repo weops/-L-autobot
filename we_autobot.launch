@@ -1,4 +1,4 @@
 <launch>
     <node name="flight_control" pkg="we_autobot" type="flight_control" output="screen" />
-    <node name="flight_cmd_wrapper" pkg="we_autobot" type="flight_cmd_wrapper" output="screen" />
+    <!--' <node name="flight_cmd_wrapper" pkg="we_autobot" type="flight_cmd_wrapper" output="screen" /> '-->
 </launch>
