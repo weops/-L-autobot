@@ -106,17 +106,22 @@ include_directories(
 ## Declare a cpp executable
 # add_executable(we_autobot_node src/we_autobot_node.cpp)
 add_executable(flight_control src/flight_control.cpp)
+add_executable(flight_cmd_wrapper src/flight_cmd_wrapper.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(we_autobot_node we_autobot_generate_messages_cpp)
 add_dependencies(flight_control ${catkin_EXPORTED_TARGETS})
+add_dependencies(flight_cmd_wrapper ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(we_autobot_node
 #   ${catkin_LIBRARIES}
 # )
  target_link_libraries(flight_control
+   ${catkin_LIBRARIES}
+ )
+ target_link_libraries(flight_cmd_wrapper
    ${catkin_LIBRARIES}
  )
 
