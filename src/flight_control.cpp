@@ -20,12 +20,13 @@ int main( int argc, char **argv)
   flightCmdWrapper.flight_print();
 
   ROS_INFO( "flight_control start" );
-  while (ros::ok())
-  {
+  while (!ros::ok());
+  //{
     // your code
     //ROS_INFO( "testing" );
-    //flightCmdWrapper.flight_print();
-  }
+    flightCmdWrapper.flight_print();
+    flightCmdWrapper.LedAnimation();
+  //}
 
   ros::spinOnce();
   loop_rate.sleep();
