@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "GPIOClass.h"
+#include <we_autobot/GPIOClass.h>
  
 using namespace std;
  

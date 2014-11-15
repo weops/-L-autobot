@@ -1,6 +1,10 @@
-#include "GPIOExample.h"
+#include <we_autobot/GPIOExample.h>
 
-int testGPIO(int inpin, int outpin){
+//int testGPIO(int inpin, int outpin){
+int main(int argc, char **argv){
+  ros::init( argc, argv, "testGPIO" );
+  ros::NodeHandle n;
+
   string in = "22";
   string out = "27";
   string inputstate;
@@ -24,13 +28,13 @@ int testGPIO(int inpin, int outpin){
     cout << "Current input pin state is " << inputstate  <<endl;
     if(inputstate == "0") // if input pin is at state "0" i.e. button pressed
     {
-        cout << "input pin state is "Pressed ".n Will check input pin state again in 20ms "<<endl;
+        cout << "input pin state is \"Pressed \".n Will check input pin state again in 20ms "<<endl;
             usleep(20000);
                 cout << "Checking again ....." << endl;
                 gpioIn->getval_gpio(inputstate); // checking again to ensure that state "0" is due to button press and not noise
         if(inputstate == "0")
         {
-            cout << "input pin state is definitely "Pressed". Turning LED ON" <<endl;
+            cout << "input pin state is definitely \"Pressed\". Turning LED ON" <<endl;
             gpioOut->setval_gpio("1"); // turn LED ON
 
             cout << " Waiting until pin is unpressed....." << endl;
@@ -41,7 +45,7 @@ int testGPIO(int inpin, int outpin){
             kill=0;
         }
         else
-            cout << "input pin state is definitely "UnPressed". That was just noise." <<endl;
+            cout << "input pin state is definitely \"UnPressed\". That was just noise." <<endl;
 
     }
     gpioOut->setval_gpio("0");
