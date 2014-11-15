@@ -1,3 +1,5 @@
+#include <we_autobot/flight_cmd_wrapper.h>
+#include <stdio.h>
 //#include "ros/ros.h"
 //#include "std_msgs/String.h"
 //
@@ -26,4 +28,11 @@
 
 FlightCmdWrapper::FlightCmdWrapper( ConnectMode mode ) : connectMode(mode)
 {
+  //printf( "connection mode: %d", connectMode );
+  //ROS_INFO( "connection mode: %d", connectMode );
+}
+
+void FlightCmdWrapper::flight_print()
+{
+  printf( "connection mode: %d\n", connectMode );
 }

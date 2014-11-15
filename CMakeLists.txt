@@ -98,6 +98,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+# add headers directory
+include_directories(include)
+
 ## Declare a cpp library
 # add_library(we_autobot
 #   src/${PROJECT_NAME}/we_autobot.cpp
@@ -105,7 +108,7 @@ include_directories(
 
 ## Declare a cpp executable
 # add_executable(we_autobot_node src/we_autobot_node.cpp)
-add_executable(flight_control src/flight_control.cpp)
+add_executable(flight_control src/flight_control.cpp src/flight_cmd_wrapper.cpp)
 #add_executable(flight_cmd_wrapper src/flight_cmd_wrapper.cpp)
 
 ## Add cmake target dependencies of the executable/library
