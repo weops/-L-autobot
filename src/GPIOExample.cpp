@@ -16,8 +16,8 @@ int main(int argc, char **argv){
 
   cout << " GPIO pins exported" << endl;
 
-  gpioOut->setdir_gpio("in"); //GPIO22 set to output
-  gpioIn->setdir_gpio("out"); // GPIO27 set to input
+  gpioOut->setdir_gpio("out"); //GPIO22 set to output
+  gpioIn->setdir_gpio("in"); // GPIO27 set to input
 
   cout << " Set GPIO pin directions" << endl;
   bool kill = 1;
@@ -52,5 +52,7 @@ int main(int argc, char **argv){
 
   }
   cout << "Exiting....." << endl;
+  gpioOut->unexport_gpio();
+  gpioIn->unexport_gpio();
   return kill;
 }
