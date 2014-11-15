@@ -14,7 +14,7 @@ int main( int argc, char **argv)
     while (ros::ok())
     {
         // your code
-        //ROS_INFO( "testing" );
+        ROS_INFO( "testing" );
     }
 
     ros::spinOnce();
