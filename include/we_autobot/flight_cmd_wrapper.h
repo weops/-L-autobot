@@ -1,6 +1,6 @@
 #ifndef _FLIGHT_CMD_WRAPPER_H_
 #define _FLIGHT_CMD_WRAPPER_H_
-#include "ros/ros.h"
+#include "std_msgs/Empty.h"
 #include <ardrone_autonomy/LedAnim.h>
 
 enum ConnectMode
@@ -14,14 +14,17 @@ class FlightCmdWrapper
 {
   public:
   private:
-    ConnectMode connectMode;
-    ros::NodeHandle n;
-    ros::ServiceClient client;
+    ConnectMode         connectMode;
+    ros::NodeHandle     n;
+    ros::ServiceClient  srvLedClient;
+    ros::Publisher      msgLandPublisher;
 
   public:
     FlightCmdWrapper( ConnectMode mode ); // hide default constructor
-    void LedAnimation();
+    void led_animation();
     
+    void flight_launch();
+    void flight_land();
     void flight_print();
 
   private:

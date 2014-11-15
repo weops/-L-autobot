@@ -8,4 +8,5 @@
 
 #include <we_autobot/flight_cmd_wrapper.h>
 
+using namespace std;
 #endif

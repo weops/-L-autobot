@@ -1,3 +1,4 @@
+#include "ros/ros.h"
 #include <we_autobot/flight_cmd_wrapper.h>
 #include <stdio.h>
 //#include "ros/ros.h"
@@ -40,7 +41,8 @@ FlightCmdWrapper::FlightCmdWrapper( ConnectMode mode ) : connectMode(mode)
       break;
   }
 
-  client = n.serviceClient<ardrone_autonomy::LedAnim>("ardrone/setledanimation");
+  srvLedClient      = n.serviceClient<ardrone_autonomy::LedAnim>("ardrone/setledanimation");
+  msgLandPublisher  = n.advertise<std_msgs::Empty>("ardrone/land", 100);
 }
 
 void FlightCmdWrapper::flight_print()
@@ -49,10 +51,11 @@ void FlightCmdWrapper::flight_print()
   ROS_INFO( "connection mode: %d\n", connectMode );
 }
 
-void FlightCmdWrapper::LedAnimation()
+void FlightCmdWrapper::led_animation()
 {
   ardrone_autonomy::LedAnim srv;
 
+  ROS_INFO("LED Animation...");
   //# 0 : BLINK_GREEN_RED
   //# 1 : BLINK_GREEN
   //# 2 : BLINK_RED
@@ -79,13 +82,27 @@ void FlightCmdWrapper::LedAnimation()
   srv.request.freq      = 4;
   srv.request.duration  = 5;
 
-  if (client.call(srv))
+  if (srvLedClient.call(srv))
   {
-    ROS_INFO("LED Animation OK");
+    ROS_INFO("OK");
   }
   else
   {
-    ROS_INFO("LED Animation FAILED");
+    ROS_INFO("FAILED");
   }
 
+}
+
+void FlightCmdWrapper::flight_launch()
+{
+}
+
+void FlightCmdWrapper::flight_land()
+{
+  std_msgs::Empty emptyMsg;
+
+
+  ROS_INFO("Drone Landing...");
+
+  msgLandPublisher.publish( emptyMsg );
 }

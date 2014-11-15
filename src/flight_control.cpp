@@ -17,16 +17,33 @@ int main( int argc, char **argv)
   //FlightCmdWrapper flightCmdWrapper(TTL);
   FlightCmdWrapper flightCmdWrapper(WIFI);
 
-  flightCmdWrapper.flight_print();
 
+  //while (!ros::ok());
+  flightCmdWrapper.flight_print();
   ROS_INFO( "flight_control start" );
-  while (!ros::ok());
-  //{
-    // your code
+
+  int cmd;
+  while (ros::ok())
+  {
     //ROS_INFO( "testing" );
-    flightCmdWrapper.flight_print();
-    flightCmdWrapper.LedAnimation();
-  //}
+    cout << "0: launch\n1: land\n2: led\n";
+    cin >> cmd;
+    cout << "I received:" << cmd << endl;
+
+    switch (cmd)
+    {
+      case 0:
+        break;
+      case 1:
+        flightCmdWrapper.flight_land();
+        break;
+      case 2:
+        flightCmdWrapper.led_animation();
+        break;
+      default:
+        break;
+    }
+  }
 
   ros::spinOnce();
   loop_rate.sleep();
