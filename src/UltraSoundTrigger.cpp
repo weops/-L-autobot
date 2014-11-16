@@ -18,13 +18,12 @@ int main(int argc, char **argv){
     // turn off trigger
     cout << " >> Settling Trigger....." << endl;
     gpioTrig->setval_gpio("0");
-    usleep(10000); //sleep for 0.01s
+    usleep(100000); //sleep for 0.1s
 
     // set trigger for 10us
     cout << " >> Pulse Trigger for 10us" << endl;
     gpioTrig->setval_gpio("1");
-    usleep(100);
-    gpioTrig->setval_gpio("0");
+    usleep(1000);
   }
   cout << "Exiting....." << endl;
   gpioTrig->unexport_gpio();
