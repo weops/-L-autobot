@@ -37,7 +37,9 @@ int main(int argc, char **argv){
     gpioEcho->getval_gpio(usstate);
   }
   // gpioOut->setval_gpio("0"); // turn LED OFF
-  cout << "Distance is "<< (pulse_end - pulse_start) * 17150 << endl;
+  cout << "Pulse Started @ " << pulse_start << endl;
+  cout << "Pulse Ended   @ " << pulse_end << endl;
+  //cout << "Distance is "<< (pulse_end - pulse_start)<< endl;
 
   cout << "Exiting....." << endl;
   // gpioOut->unexport_gpio();
