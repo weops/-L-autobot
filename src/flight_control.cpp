@@ -43,11 +43,15 @@ int main( int argc, char **argv)
   while (!ros::ok());
   //system( "rosrun ardrone_autonomy ardrone_driver" );
   ROS_INFO( "waiting for drone..." );
+  // wait till drone is ready
   while (!flightCmdWrapper->check_drone_ready());
   flightCmdWrapper->print_connection_mode();
   ROS_INFO( "flight_control start" );
 
-  // wait till drone is ready
+  // TODO: start with push button
+
+  // TODO: in automode
+  // count down 10 sec and launch
 
   while (ros::ok() && !programExit)
   {
@@ -103,16 +107,16 @@ bool flight_interactive( FlightCmdWrapper *flightCmdWrapper )
       flightCmdWrapper->flight_land();
       break;
     case ADVANCE:
-      flightCmdWrapper->flight_advance( 0.2 );
+      flightCmdWrapper->flight_advance( 0.1 );
       break;
     case STRIDE:
-      flightCmdWrapper->flight_stride( 0.2 );
+      flightCmdWrapper->flight_stride( 0.1 );
       break;
     case UP:
-      flightCmdWrapper->flight_up( 0.2 );
+      flightCmdWrapper->flight_up( 0.1 );
       break;
     case TURN:
-      flightCmdWrapper->flight_turn( -0.2 );
+      flightCmdWrapper->flight_turn( -0.1 );
       break;
     case HOVER:
       flightCmdWrapper->flight_hover();
@@ -133,6 +137,20 @@ bool flight_interactive( FlightCmdWrapper *flightCmdWrapper )
 bool flight_auto( FlightCmdWrapper *flightCmdWrapper )
 {
   bool   programExit = false;
+
+  // wait for 10 sec then launch
+  // wait for 10 sec then land
+
+  flightCmdWrapper->led_animation(); //TODO: launching sequence should use different LED animation
+  ros::Duration(10).sleep();
+  flightCmdWrapper->flight_launch();
+  ROS_INFO (" launch");
+  ros::Duration(10).sleep();
+  flightCmdWrapper->flight_land();
+  ROS_INFO ("land");
+
+  programExit = true;
+
   return programExit;
 }
 
