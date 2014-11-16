@@ -7,7 +7,7 @@ int main(int argc, char **argv){
   ros::NodeHandle n;
 
   string in = "22"; //button
-  string inputstate = "1";
+  string inputstate;
   GPIOClass* gpioIn = new GPIOClass(in); //create new GPIO object to be attached to  GPIO22
   gpioIn->export_gpio(); //export GPIO22
 
@@ -22,16 +22,16 @@ int main(int argc, char **argv){
   
   cout << " GPIO pins exported" << endl;
 
-  gpioIn->setdir_gpio("in"); // GPIO27 set to input
-  gpioOut->setdir_gpio("out"); //GPIO22 set to output
+  gpioIn->setdir_gpio("in"); // GPIO22 set to input
+  gpioOut->setdir_gpio("out"); //GPIO4 set to output
   gpioTrig->setdir_gpio("out"); //set to output trigger
   cout << " Set GPIO pin directions" << endl;
 
   bool kill = 10;
+  cout << "Press Button | state:" << inputstate  <<endl;
   while(kill > 0){
     usleep(500000);  // wait for 0.5 seconds
     gpioIn->getval_gpio(inputstate); //read state of GPIO22 input pin
-    cout << "Current input pin state is " << inputstate  <<endl;
     if(inputstate == "0"){ // if input pin is at state "0" i.e. button pressed
       cout << "input pin state is \"Pressed \". Will check input pin state again in 20ms "<<endl;
       usleep(20000);
