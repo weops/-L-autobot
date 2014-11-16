@@ -37,6 +37,8 @@ int main( int argc, char **argv)
   FlightCmdWrapper flightCmdWrapper(WIFI);
 
 
+  // TODO: parse in from rosrun arg for program mode: CMD line or Auto
+  //
   //while (!ros::ok());
   flightCmdWrapper.flight_print();
   ROS_INFO( "flight_control start" );
