@@ -11,7 +11,7 @@ int main(int argc, char **argv){
   // gpioOut->export_gpio(); //export GPIO4
 
   string echo = "27"; //echo
-  string ussate = "1";
+  string usstate = "1";
   GPIOClass* gpioEcho = new GPIOClass(echo); //create new GPIO object to be attached to  GPIO27
   gpioEcho->export_gpio(); //export GPIO27
   
