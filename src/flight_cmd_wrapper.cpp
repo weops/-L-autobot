@@ -207,7 +207,7 @@ bool FlightCmdWrapper::check_drone_ready()
 
   srv.request.type      = 1;
   srv.request.freq      = 4;
-  srv.request.duration  = 1;
+  srv.request.duration  = 5;
 
   isReady = (srvLedClient.call(srv)) ? true : false;
 
