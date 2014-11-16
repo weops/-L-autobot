@@ -27,7 +27,7 @@ int main(int argc, char **argv){
   gpioTrig->setdir_gpio("out"); //set to output trigger
   cout << " Set GPIO pin directions" << endl;
 
-  bool kill = 10;
+  int kill = 10;
   cout << "Press Button | state:" << inputstate  <<endl;
   while(kill > 0){
     usleep(500000);  // wait for 0.5 seconds
