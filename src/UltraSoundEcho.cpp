@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 
   cout << "Pulse Started @ " << pulse_start.tv_usec << endl;
   cout << "Pulse Ended   @ " << pulse_end.tv_usec << endl;
-  cout << "Distance is "<< (pulse_end - pulse_start) * 0.000001 * 171.5 << "m"<< endl;
+  cout << "Distance is "<< (pulse_end.tv_usec - pulse_start.tv_usec) * 0.000001 * 171.5 << "m"<< endl;
 
   cout << "Exiting....." << endl;
 
