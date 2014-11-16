@@ -6,8 +6,8 @@ int main(int argc, char **argv){
   ros::NodeHandle n;
 
   string in = "22"; //button
-  string out = "7"; //led
-  string inputstate;
+  string out = "4"; //led
+  string inputstate = "1";
   GPIOClass* gpioOut = new GPIOClass(in); //create new GPIO object to be attached to  GPIO22
   GPIOClass* gpioIn = new GPIOClass(out); //create new GPIO object to be attached to  GPIO7
   gpioOut->export_gpio(); //export GPIO22
@@ -33,7 +33,7 @@ int main(int argc, char **argv){
   bool kill = 1;
   while(kill){
     usleep(500000);  // wait for 0.5 seconds
-    gpioIn->getval_gpio(inputstate); //read state of GPIO17 input pin
+    gpioIn->getval_gpio(inputstate); //read state of GPIO22 input pin
     gpioEcho->getval_gpio(usstate); //read state of ultrasensor
     cout << "Current input pin state is " << inputstate  <<endl;
     if(inputstate == "0"){ // if input pin is at state "0" i.e. button pressed
