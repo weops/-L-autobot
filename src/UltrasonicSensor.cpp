@@ -16,7 +16,7 @@ int main(int argc, char **argv){
 
   string trig = "17"; //trigger
   string echo = "27"; //echo
-  string usstate; //us state
+  string usstate = "0"; //us state
   GPIOClass* gpioTrig = new GPIOClass(trig); //create new GPIO object to be attached to  GPIO17
   GPIOClass* gpioEcho = new GPIOClass(echo); //create new GPIO object to be attached to  GPIO27
   gpioTrig->export_gpio(); //export GPIO17
@@ -57,16 +57,17 @@ int main(int argc, char **argv){
           // set trigger for 10us
           cout << " >> Pulse Trigger for 10us" << endl;
           gpioTrig->setval_gpio("1");
-          usleep(1);
+          usleep(10);
           gpioTrig->setval_gpio("0");
 
           time_t pulse_start;
           time_t pulse_end;
-          gpioEcho->getval_gpio(usstate);
+          cout << " >> Waiting Echo  : "<< usstate << endl;
           while (usstate == "0"){
             time(&pulse_start);
             gpioEcho->getval_gpio(usstate);
           }
+          cout << " >> Receiving Echo : "<< usstate << endl;
           while (usstate == "1"){
             time(&pulse_end);
             gpioEcho->getval_gpio(usstate);
