@@ -14,14 +14,14 @@ int main(int argc, char **argv){
   gpioTrig->setdir_gpio("out"); //set to output trigger
   cout << " Set GPIO pin directions" << endl;
 
+
+  cout << " >> Pulse Trigger for 1ms / 100ms" << endl;
   while(1){
     // turn off trigger
-    cout << " >> Settling Trigger....." << endl;
     gpioTrig->setval_gpio("0");
     usleep(100000); //sleep for 0.1s
 
     // set trigger for 10us
-    cout << " >> Pulse Trigger for 10us" << endl;
     gpioTrig->setval_gpio("1");
     usleep(1000);
   }
