@@ -40,8 +40,6 @@ int main( int argc, char **argv)
   //FlightCmdWrapper flightCmdWrapper(TTL);
   FlightCmdWrapper *flightCmdWrapper = new FlightCmdWrapper(WIFI);
 
-  // TODO: parse in from rosrun arg for program mode: CMD line or Auto
-  //
   while (!ros::ok());
   //system( "rosrun ardrone_autonomy ardrone_driver" );
   ROS_INFO( "waiting for drone..." );
