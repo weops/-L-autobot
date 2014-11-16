@@ -14,7 +14,6 @@ int main(int argc, char **argv){
   gpioTrig->setdir_gpio("out"); //set to output trigger
   cout << " Set GPIO pin directions" << endl;
 
-  cout << "Press Button | state:" << inputstate  <<endl;
   while(1){
     // turn off trigger
     cout << " >> Settling Trigger....." << endl;
@@ -29,5 +28,5 @@ int main(int argc, char **argv){
   }
   cout << "Exiting....." << endl;
   gpioTrig->unexport_gpio();
-  return kill;
+  return 0;
 }
