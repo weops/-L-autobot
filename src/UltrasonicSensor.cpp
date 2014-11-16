@@ -26,7 +26,10 @@ int main(int argc, char **argv){
   gpioOut->setdir_gpio("out"); //GPIO22 set to output
   gpioIn->setdir_gpio("in"); // GPIO27 set to input
 
+  gpioTrig->setdir_gpio("out"); //set to output trigger
+  gpioEcho->setdir_gpio("in"); // set to read echo
   cout << " Set GPIO pin directions" << endl;
+
   bool kill = 1;
   while(kill)
   {
@@ -47,6 +50,7 @@ int main(int argc, char **argv){
             cout << " Waiting until pin is unpressed....." << endl;
             while (inputstate == "0"){ 
             gpioIn->getval_gpio(inputstate);
+            
             };
             cout << "pin is unpressed" << endl;
             kill=0;
