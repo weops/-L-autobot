@@ -11,7 +11,6 @@ int main(int argc, char **argv){
   // gpioOut->export_gpio(); //export GPIO4
 
   string echo = "27"; //echo
-  string usstate = "1";
   GPIOClass* gpioEcho = new GPIOClass(echo); //create new GPIO object to be attached to  GPIO27
   gpioEcho->export_gpio(); //export GPIO27
   
@@ -23,6 +22,9 @@ int main(int argc, char **argv){
 
   time_t pulse_start;
   time_t pulse_end;
+
+  string usstate;
+  gpioEcho->getval_gpio(usstate);
   cout << " >> Waiting Echo  : "<< usstate << endl;
   while (usstate == "0"){
     time(&pulse_start);
