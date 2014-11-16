@@ -110,3 +110,55 @@ void FlightCmdWrapper::flight_land()
 
   msgLandPublisher.publish( emptyMsg );
 }
+
+void FlightCmdWrapper::flight_advance( double magnitude )
+{
+  geometry_msgs::Twist moveMsg;
+  
+  moveMsg.linear.x = (magnitude <= 1 && magnitude >= -1) ? magnitude : 0;
+  moveMsg.linear.y = 0;
+  moveMsg.linear.z = 0;
+
+  moveMsg.angular.z = 0;
+
+  ROS_INFO( "Flight Advance %f", moveMsg.linear.x );
+}
+
+void FlightCmdWrapper::flight_stride( double magnitude )
+{
+  geometry_msgs::Twist moveMsg;
+  
+  moveMsg.linear.x = 0;
+  moveMsg.linear.y = (magnitude <= 1 && magnitude >= -1) ? magnitude : 0;
+  moveMsg.linear.z = 0;
+
+  moveMsg.angular.z = 0;
+
+  ROS_INFO( "Flight Stride %f", moveMsg.linear.y );
+}
+
+void FlightCmdWrapper::flight_up( double magnitude )
+{
+  geometry_msgs::Twist moveMsg;
+  
+  moveMsg.linear.x = 0;
+  moveMsg.linear.y = 0;
+  moveMsg.linear.z = (magnitude <= 1 && magnitude >= -1) ? magnitude : 0;
+
+  moveMsg.angular.z = 0;
+
+  ROS_INFO( "Flight Up %f", moveMsg.linear.z );
+}
+
+void FlightCmdWrapper::flight_turn( double magnitude )
+{
+  geometry_msgs::Twist moveMsg;
+  
+  moveMsg.linear.x = 0;
+  moveMsg.linear.y = 0;
+  moveMsg.linear.z = 0;
+
+  moveMsg.angular.z = (magnitude <= 1 && magnitude >= -1) ? magnitude : 0;
+
+  ROS_INFO( "Flight turn %f", moveMsg.angular.z );
+}

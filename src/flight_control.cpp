@@ -27,9 +27,13 @@ int main( int argc, char **argv)
 
   while (ros::ok() && !programExit)
   {
-    cout << "0: launch\n"
-      << "1: land\n"
-      << "2: led\n"
+    cout << "0: led\n"
+      << "1: launch\n"
+      << "2: land\n"
+      << "3: advance\n"
+      << "4: stride\n"
+      << "5: up\n"
+      << "6: turn\n"
       << "9: exit\n";
     cin >> cmd;
     cout << "I received:" << cmd << endl;
@@ -37,13 +41,25 @@ int main( int argc, char **argv)
     switch (cmd)
     {
       case 0:
-        flightCmdWrapper.flight_launch();
+        flightCmdWrapper.led_animation();
         break;
       case 1:
-        flightCmdWrapper.flight_land();
+        flightCmdWrapper.flight_launch();
         break;
       case 2:
-        flightCmdWrapper.led_animation();
+        flightCmdWrapper.flight_land();
+        break;
+      case 3:
+        flightCmdWrapper.flight_advance( 0.2 );
+        break;
+      case 4:
+        flightCmdWrapper.flight_stride( 0.2 );
+        break;
+      case 5:
+        flightCmdWrapper.flight_up( 0.2 );
+        break;
+      case 6:
+        flightCmdWrapper.flight_turn( -0.2 );
         break;
       case 9:
         ROS_INFO( "Exiting programming" );

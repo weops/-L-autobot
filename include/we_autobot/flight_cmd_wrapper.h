@@ -2,6 +2,7 @@
 #define _FLIGHT_CMD_WRAPPER_H_
 #include "std_msgs/Empty.h"
 #include <ardrone_autonomy/LedAnim.h>
+#include "geometry_msgs/Twist.h"
 
 enum ConnectMode
 {
@@ -27,6 +28,10 @@ class FlightCmdWrapper
     void flight_launch();
     void flight_land();
     void flight_print();
+    void flight_advance( double magnitude );
+    void flight_stride( double magnitude );
+    void flight_up( double magnitude );
+    void flight_turn( double magnitude );
 
   private:
 };
