@@ -1,4 +1,4 @@
-#include <we_autobot/UltraSoundEcho.h>
+#include <we_autobot/UltraSoundEchoOnce.h>
 #include <time.h>
 
 //int testGPIO(int inpin, int outpin){
@@ -20,26 +20,25 @@ int main(int argc, char **argv){
 
   struct timeval pulse_start, pulse_end;
   string usstate;
-  while(1){
+  gpioEcho->getval_gpio(usstate);
+  cout << " >> Waiting Echo  : "<< usstate << endl;
+  while (usstate == "0"){
+    //time(&pulse_start);
+    gettimeofday(&pulse_start, NULL);
     gpioEcho->getval_gpio(usstate);
-    cout << " >> Waiting Echo  : "<< usstate << endl;
-    while (usstate == "0"){
-      //time(&pulse_start);
-      gettimeofday(&pulse_start, NULL);
-      gpioEcho->getval_gpio(usstate);
-    }
-
-    cout << " >> Receiving Echo : "<< usstate << endl;
-    while (usstate == "1"){
-      //time(&pulse_end);
-      gettimeofday(&pulse_end, NULL);
-      gpioEcho->getval_gpio(usstate);
-    }
-
-    cout << "Pulse Started @ " << pulse_start.tv_usec << endl;
-    cout << "Pulse Ended   @ " << pulse_end.tv_usec << endl;
-    cout << "Distance is "<< (pulse_end.tv_usec - pulse_start.tv_usec) * 0.000001 * 171.5 << "m"<< endl;
   }
+
+  cout << " >> Receiving Echo : "<< usstate << endl;
+  while (usstate == "1"){
+    //time(&pulse_end);
+    gettimeofday(&pulse_end, NULL);
+    gpioEcho->getval_gpio(usstate);
+  }
+
+  cout << "Pulse Started @ " << pulse_start.tv_usec << endl;
+  cout << "Pulse Ended   @ " << pulse_end.tv_usec << endl;
+  cout << "Distance is "<< (pulse_end.tv_usec - pulse_start.tv_usec) * 0.000001 * 171.5 << "m"<< endl;
+
   cout << "Exiting....." << endl;
 
   gpioEcho->unexport_gpio();
