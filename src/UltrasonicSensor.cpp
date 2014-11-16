@@ -8,8 +8,8 @@ int main(int argc, char **argv){
   string in = "22"; //button
   string out = "4"; //led
   string inputstate = "1";
-  GPIOClass* gpioOut = new GPIOClass(in); //create new GPIO object to be attached to  GPIO22
-  GPIOClass* gpioIn = new GPIOClass(out); //create new GPIO object to be attached to  GPIO7
+  GPIOClass* gpioOut = new GPIOClass(out); //create new GPIO object to be attached to  GPIO22
+  GPIOClass* gpioIn = new GPIOClass(in); //create new GPIO object to be attached to  GPIO7
   gpioOut->export_gpio(); //export GPIO22
   gpioIn->export_gpio(); //export GPIO7
 
