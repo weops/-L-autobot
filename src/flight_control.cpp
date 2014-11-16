@@ -8,8 +8,24 @@
 
 int main( int argc, char **argv)
 {
-  int   cmd;
   bool  programExit = false;
+
+  enum DroneCMD
+  {
+     LED,
+     FLAT_TRIM,
+     LAUNCH,
+     LAND,
+     ADVANCE,
+     STRIDE,
+     UP,
+     TURN,
+     HOVER,
+     EXIT
+  };
+
+  DroneCMD cmd;
+  int       inputCMD;
 
   ros::init( argc, argv, "flight_control" );
   
@@ -27,45 +43,54 @@ int main( int argc, char **argv)
 
   while (ros::ok() && !programExit)
   {
-    cout << "0: led\n"
-      << "1: launch\n"
-      << "2: land\n"
-      << "3: advance\n"
-      << "4: stride\n"
-      << "5: up\n"
-      << "6: turn\n"
-      << "9: exit\n";
-    cin >> cmd;
-    cout << "I received:" << cmd << endl;
-
+    cout  << LED        << ": led\n"
+          << FLAT_TRIM  << ": flat_trim\n"
+          << LAUNCH     << ": launch\n"
+          << LAND       << ": land\n"
+          << ADVANCE    << ": advance\n"
+          << STRIDE     << ": stride\n"
+          << UP         << ": up\n"
+          << TURN       << ": turn\n"
+          << HOVER      << ": hover\n"
+          << EXIT       << ": exit\n";
+    cin >> inputCMD;
+    cout << "I received:" << inputCMD << endl;
+    cmd = (DroneCMD)inputCMD;
     switch (cmd)
     {
-      case 0:
+      case LED:
         flightCmdWrapper.led_animation();
         break;
-      case 1:
+      case FLAT_TRIM:
+        flightCmdWrapper.flat_trim();
+        break;
+      case LAUNCH:
         flightCmdWrapper.flight_launch();
         break;
-      case 2:
+      case LAND:
         flightCmdWrapper.flight_land();
         break;
-      case 3:
+      case ADVANCE:
         flightCmdWrapper.flight_advance( 0.2 );
         break;
-      case 4:
+      case STRIDE:
         flightCmdWrapper.flight_stride( 0.2 );
         break;
-      case 5:
+      case UP:
         flightCmdWrapper.flight_up( 0.2 );
         break;
-      case 6:
+      case TURN:
         flightCmdWrapper.flight_turn( -0.2 );
         break;
-      case 9:
+      case HOVER:
+        flightCmdWrapper.flight_hover();
+        break;
+      case EXIT:
         ROS_INFO( "Exiting programming" );
         programExit = true;
         break;
       default:
+        ROS_INFO( "Wrong CMD" );
         break;
     }
   }

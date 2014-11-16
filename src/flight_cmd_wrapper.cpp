@@ -42,8 +42,10 @@ FlightCmdWrapper::FlightCmdWrapper( ConnectMode mode ) : connectMode(mode)
   }
 
   srvLedClient        = n.serviceClient<ardrone_autonomy::LedAnim>("ardrone/setledanimation");
+  srvFlatTrimClient   = n.serviceClient<std_srvs::Empty>("ardrone/flattrim");
   msgLandPublisher    = n.advertise<std_msgs::Empty>("ardrone/land", 100);
   msgLaunchPublisher  = n.advertise<std_msgs::Empty>("ardrone/takeoff", 100);
+  msgMovePublisher    = n.advertise<geometry_msgs::Twist>("cmd_vel", 100);
 }
 
 void FlightCmdWrapper::flight_print()
@@ -93,6 +95,21 @@ void FlightCmdWrapper::led_animation()
 
 }
 
+void FlightCmdWrapper::flat_trim()
+{
+  std_srvs::Empty srv;
+
+  ROS_INFO("Flat Trim...");
+  if (srvFlatTrimClient.call( srv ))
+  {
+    ROS_INFO("OK");
+  }
+  else
+  {
+    ROS_INFO("FAILED");
+  }
+}
+
 void FlightCmdWrapper::flight_launch()
 {
   std_msgs::Empty emptyMsg;
@@ -122,6 +139,7 @@ void FlightCmdWrapper::flight_advance( double magnitude )
   moveMsg.angular.z = 0;
 
   ROS_INFO( "Flight Advance %f", moveMsg.linear.x );
+  msgMovePublisher.publish( moveMsg );
 }
 
 void FlightCmdWrapper::flight_stride( double magnitude )
@@ -135,6 +153,7 @@ void FlightCmdWrapper::flight_stride( double magnitude )
   moveMsg.angular.z = 0;
 
   ROS_INFO( "Flight Stride %f", moveMsg.linear.y );
+  msgMovePublisher.publish( moveMsg );
 }
 
 void FlightCmdWrapper::flight_up( double magnitude )
@@ -148,6 +167,7 @@ void FlightCmdWrapper::flight_up( double magnitude )
   moveMsg.angular.z = 0;
 
   ROS_INFO( "Flight Up %f", moveMsg.linear.z );
+  msgMovePublisher.publish( moveMsg );
 }
 
 void FlightCmdWrapper::flight_turn( double magnitude )
@@ -161,4 +181,21 @@ void FlightCmdWrapper::flight_turn( double magnitude )
   moveMsg.angular.z = (magnitude <= 1 && magnitude >= -1) ? magnitude : 0;
 
   ROS_INFO( "Flight turn %f", moveMsg.angular.z );
+  msgMovePublisher.publish( moveMsg );
+}
+
+void FlightCmdWrapper::flight_hover()
+{
+  geometry_msgs::Twist moveMsg;
+  
+  moveMsg.linear.x = 0;
+  moveMsg.linear.y = 0;
+  moveMsg.linear.z = 0;
+
+  moveMsg.angular.x = 0;
+  moveMsg.angular.y = 0;
+  moveMsg.angular.z = 0;
+
+  ROS_INFO( "Flight hover %f", moveMsg.angular.z );
+  msgMovePublisher.publish( moveMsg );
 }

@@ -9,6 +9,8 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     rospy
     std_msgs
+    std_srvs
+    geometry_msgs
     ardrone_autonomy
 )
 
