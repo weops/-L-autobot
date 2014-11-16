@@ -111,7 +111,9 @@ include_directories(include)
 # add_executable(we_autobot_node src/we_autobot_node.cpp)
 add_executable(flight_control src/flight_control.cpp src/flight_cmd_wrapper.cpp)
 #add_executable(GPIOExample src/GPIOExample.cpp src/GPIOClass.cpp)
-add_executable(testUltraSense src/UltrasonicSensor.cpp src/GPIOClass.cpp)
+#add_executable(testUltraSense src/UltrasonicSensor.cpp src/GPIOClass.cpp)
+add_executable(usTrigger src/UltraSoundTrigger.cpp src/GPIOClass.cpp)
+add_executable(usEcho src/UltraSoundEcho.cpp src/GPIOClass.cpp)
 #add_executable(flight_cmd_wrapper src/flight_cmd_wrapper.cpp)
 
 ## Add cmake target dependencies of the executable/library
@@ -119,7 +121,9 @@ add_executable(testUltraSense src/UltrasonicSensor.cpp src/GPIOClass.cpp)
 # add_dependencies(we_autobot_node we_autobot_generate_messages_cpp)
 add_dependencies(flight_control ${catkin_EXPORTED_TARGETS})
 #add_dependencies(GPIOExample ${catkin_EXPORTED_TARGETS})
-add_dependencies(testUltraSense ${catkin_EXPORTED_TARGETS})
+#add_dependencies(testUltraSense ${catkin_EXPORTED_TARGETS})
+add_dependencies(usTrigger ${catkin_EXPORTED_TARGETS})
+add_dependencies(usEcho ${catkin_EXPORTED_TARGETS})
 #add_dependencies(flight_cmd_wrapper ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
@@ -132,7 +136,13 @@ add_dependencies(testUltraSense ${catkin_EXPORTED_TARGETS})
 # target_link_libraries(GPIOExample
 #   ${catkin_LIBRARIES}
 # )
- target_link_libraries(testUltraSense
+# target_link_libraries(testUltraSense
+#   ${catkin_LIBRARIES}
+# )
+ target_link_libraries(usTrigger
+   ${catkin_LIBRARIES}
+ )
+  target_link_libraries(usEcho
    ${catkin_LIBRARIES}
  )
 # target_link_libraries(flight_cmd_wrapper
