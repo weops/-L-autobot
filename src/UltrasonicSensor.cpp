@@ -48,8 +48,7 @@ int main(int argc, char **argv){
 
         cout << " Waiting until pin is unpressed....." << endl;
         while (inputstate == "0"){ 
-          gpioIn->getval_gpio(inputstate);
-          // WHILE HOLD, TEST ULTRA SOUND
+          
           
           // turn off trigger
           gpioTrig->setval_gpio("0");
@@ -70,6 +69,9 @@ int main(int argc, char **argv){
           }
 
           cout << "Distance is "<< (pulse_end - pulse_start) * 17150 << endl;
+
+          gpioIn->getval_gpio(inputstate);
+          // WHILE HOLD, TEST ULTRA SOUND
         };
         cout << "pin is unpressed" << endl;
         kill = 0;
