@@ -18,6 +18,7 @@ class FlightCmdWrapper
     ros::NodeHandle     n;
     ros::ServiceClient  srvLedClient;
     ros::Publisher      msgLandPublisher;
+    ros::Publisher      msgLaunchPublisher;
 
   public:
     FlightCmdWrapper( ConnectMode mode ); // hide default constructor

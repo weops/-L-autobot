@@ -41,13 +41,13 @@ FlightCmdWrapper::FlightCmdWrapper( ConnectMode mode ) : connectMode(mode)
       break;
   }
 
-  srvLedClient      = n.serviceClient<ardrone_autonomy::LedAnim>("ardrone/setledanimation");
-  msgLandPublisher  = n.advertise<std_msgs::Empty>("ardrone/land", 100);
+  srvLedClient        = n.serviceClient<ardrone_autonomy::LedAnim>("ardrone/setledanimation");
+  msgLandPublisher    = n.advertise<std_msgs::Empty>("ardrone/land", 100);
+  msgLaunchPublisher  = n.advertise<std_msgs::Empty>("ardrone/takeoff", 100);
 }
 
 void FlightCmdWrapper::flight_print()
 {
-  //printf( "connection mode: %d\n", connectMode );
   ROS_INFO( "connection mode: %d\n", connectMode );
 }
 
@@ -95,12 +95,16 @@ void FlightCmdWrapper::led_animation()
 
 void FlightCmdWrapper::flight_launch()
 {
+  std_msgs::Empty emptyMsg;
+
+  ROS_INFO("Drone Launching...");
+
+  msgLaunchPublisher.publish( emptyMsg );
 }
 
 void FlightCmdWrapper::flight_land()
 {
   std_msgs::Empty emptyMsg;
-
 
   ROS_INFO("Drone Landing...");
 

@@ -8,6 +8,9 @@
 
 int main( int argc, char **argv)
 {
+  int   cmd;
+  bool  programExit = false;
+
   ros::init( argc, argv, "flight_control" );
   
   ros::NodeHandle n;
@@ -22,23 +25,29 @@ int main( int argc, char **argv)
   flightCmdWrapper.flight_print();
   ROS_INFO( "flight_control start" );
 
-  int cmd;
-  while (ros::ok())
+  while (ros::ok() && !programExit)
   {
-    //ROS_INFO( "testing" );
-    cout << "0: launch\n1: land\n2: led\n";
+    cout << "0: launch\n"
+      << "1: land\n"
+      << "2: led\n"
+      << "9: exit\n";
     cin >> cmd;
     cout << "I received:" << cmd << endl;
 
     switch (cmd)
     {
       case 0:
+        flightCmdWrapper.flight_launch();
         break;
       case 1:
         flightCmdWrapper.flight_land();
         break;
       case 2:
         flightCmdWrapper.led_animation();
+        break;
+      case 9:
+        ROS_INFO( "Exiting programming" );
+        programExit = true;
         break;
       default:
         break;
