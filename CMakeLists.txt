@@ -112,8 +112,8 @@ include_directories(include)
 add_executable(flight_control src/flight_control.cpp src/flight_cmd_wrapper.cpp)
 #add_executable(GPIOExample src/GPIOExample.cpp src/GPIOClass.cpp)
 #add_executable(testUltraSense src/UltrasonicSensor.cpp src/GPIOClass.cpp)
-add_executable(usTrigger src/UltraSoundTrigger.cpp src/GPIOClass.cpp)
-add_executable(usEcho src/UltraSoundEcho.cpp src/GPIOClass.cpp)
+add_executable(usTrigger src/ust.cpp src/GPIOClass.cpp)
+add_executable(usEcho src/use.cpp src/GPIOClass.cpp)
 #add_executable(flight_cmd_wrapper src/flight_cmd_wrapper.cpp)
 
 ## Add cmake target dependencies of the executable/library
