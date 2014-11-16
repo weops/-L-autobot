@@ -130,8 +130,8 @@ add_dependencies(UltrasoncicSensor ${catkin_EXPORTED_TARGETS})
    ${catkin_LIBRARIES}
  )
 # target_link_libraries(GPIOExample
-   ${catkin_LIBRARIES}
- )
+#   ${catkin_LIBRARIES}
+# )
  target_link_libraries(UltrasonicSensor
    ${catkin_LIBRARIES}
  )
