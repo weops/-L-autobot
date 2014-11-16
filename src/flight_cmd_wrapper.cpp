@@ -48,7 +48,7 @@ FlightCmdWrapper::FlightCmdWrapper( ConnectMode mode ) : connectMode(mode)
   msgMovePublisher    = n.advertise<geometry_msgs::Twist>("cmd_vel", 100);
 }
 
-void FlightCmdWrapper::flight_print()
+void FlightCmdWrapper::print_connection_mode()
 {
   ROS_INFO( "connection mode: %d\n", connectMode );
 }
@@ -198,4 +198,21 @@ void FlightCmdWrapper::flight_hover()
 
   ROS_INFO( "Flight hover %f", moveMsg.angular.z );
   msgMovePublisher.publish( moveMsg );
+}
+
+bool FlightCmdWrapper::check_drone_ready()
+{
+  bool isReady = false;
+  ardrone_autonomy::LedAnim srv;
+
+  srv.request.type      = 1;
+  srv.request.freq      = 4;
+  srv.request.duration  = 1;
+
+  isReady = (srvLedClient.call(srv)) ? true : false;
+
+  if (isReady)
+    ROS_INFO( "Drone is ready!" );
+
+  return isReady;
 }

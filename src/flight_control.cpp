@@ -39,9 +39,12 @@ int main( int argc, char **argv)
 
   // TODO: parse in from rosrun arg for program mode: CMD line or Auto
   //
-  //while (!ros::ok());
-  flightCmdWrapper.flight_print();
+  while (!ros::ok());
+  while (!flightCmdWrapper.check_drone_ready());
+  flightCmdWrapper.print_connection_mode();
   ROS_INFO( "flight_control start" );
+
+  // wait till drone is ready
 
   while (ros::ok() && !programExit)
   {

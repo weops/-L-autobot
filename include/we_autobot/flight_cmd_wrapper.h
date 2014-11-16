@@ -30,12 +30,14 @@ class FlightCmdWrapper
     void flat_trim();
     void flight_launch();
     void flight_land();
-    void flight_print();
+    void print_connection_mode();
     void flight_advance( double magnitude );
     void flight_stride( double magnitude );
     void flight_up( double magnitude );
     void flight_turn( double magnitude );
     void flight_hover();
+
+    bool check_drone_ready();
 
   private:
 };
