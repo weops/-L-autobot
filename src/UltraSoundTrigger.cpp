@@ -1,4 +1,4 @@
-#include <we_autobot/UltraSoungTrigger.h>
+#include <we_autobot/UltraSoundTrigger.h>
 #include <time.h>
 
 //int testGPIO(int inpin, int outpin){
