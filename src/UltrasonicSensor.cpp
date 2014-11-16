@@ -50,6 +50,7 @@ int main(int argc, char **argv){
           gpioIn->getval_gpio(inputstate);
         };
         cout << "pin is unpressed" << endl;
+        kill = 0;
       }
       else{
           cout << "input pin state is definitely \"UnPressed\". That was just noise." <<endl;
@@ -60,5 +61,7 @@ int main(int argc, char **argv){
   cout << "Exiting....." << endl;
   gpioOut->unexport_gpio();
   gpioIn->unexport_gpio();
+  gpioTrig->unexport_gpio();
+  gpioEcho->unexport_gpio();
   return kill;
 }
