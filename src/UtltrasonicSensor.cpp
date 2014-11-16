@@ -1,4 +1,4 @@
-#include <we_autobot/GPIOExample.h>
+#include <we_autobot/UltrasonicSensor.h>
 
 //int testGPIO(int inpin, int outpin){
 int main(int argc, char **argv){
