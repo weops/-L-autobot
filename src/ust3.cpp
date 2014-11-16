@@ -5,11 +5,13 @@
 int main(int argc, char **argv){
   ros::init( argc, argv, "usTrigger" );
   ros::NodeHandle n;
-
+  
+  // PIN DESC
   // GPIO 27: Rear  Middle
   // GPIO 5 : Front Right
   // GPIO 13: Front Left
-  GPIOClass* gpioRM = new GPIOClass("17"); 
+
+  GPIOClass* gpioRM = new GPIOClass("17"); //TODO: CHANGE THIS PIN TO MATCH DESC ABOVE
   GPIOClass* gpioFR = new GPIOClass("5");
   GPIOClass* gpioFL = new GPIOClass("13");  
   gpioRM->export_gpio();
