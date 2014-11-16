@@ -49,23 +49,27 @@ int main(int argc, char **argv){
         cout << " Waiting until pin is unpressed....." << endl;
         while (inputstate == "0"){ 
           
-          
           // turn off trigger
+          cout << " >> Settling Trigger....." << endl;
           gpioTrig->setval_gpio("0");
-          usleep(200000); //sleep for 0.2s
+          usleep(20000); //sleep for 0.2s
 
           // set trigger for 10us
+          cout << " >> Pulse Trigger for 10us" << endl;
           gpioTrig->setval_gpio("1");
-          usleep(10);
+          usleep(1);
           gpioTrig->setval_gpio("0");
 
           time_t pulse_start;
           time_t pulse_end;
+          gpioEcho->getval_gpio(usstate);
           while (usstate == "0"){
             time(&pulse_start);
+            gpioEcho->getval_gpio(usstate);
           }
           while (usstate == "1"){
             time(&pulse_end);
+            gpioEcho->getval_gpio(usstate);
           }
 
           cout << "Distance is "<< (pulse_end - pulse_start) * 17150 << endl;
