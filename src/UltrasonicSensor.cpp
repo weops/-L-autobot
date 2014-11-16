@@ -8,10 +8,10 @@ int main(int argc, char **argv){
   string in = "22"; //button
   string out = "4"; //led
   string inputstate = "1";
-  GPIOClass* gpioOut = new GPIOClass(out); //create new GPIO object to be attached to  GPIO22
-  GPIOClass* gpioIn = new GPIOClass(in); //create new GPIO object to be attached to  GPIO7
-  gpioOut->export_gpio(); //export GPIO22
-  gpioIn->export_gpio(); //export GPIO7
+  GPIOClass* gpioOut = new GPIOClass(out); //create new GPIO object to be attached to  GPIO4
+  GPIOClass* gpioIn = new GPIOClass(in); //create new GPIO object to be attached to  GPIO22
+  gpioOut->export_gpio(); //export GPIO4
+  gpioIn->export_gpio(); //export GPIO22
 
   string trig = "17"; //trigger
   string echo = "27"; //echo
@@ -37,7 +37,7 @@ int main(int argc, char **argv){
     gpioEcho->getval_gpio(usstate); //read state of ultrasensor
     cout << "Current input pin state is " << inputstate  <<endl;
     if(inputstate == "0"){ // if input pin is at state "0" i.e. button pressed
-      cout << "input pin state is \"Pressed \".n Will check input pin state again in 20ms "<<endl;
+      cout << "input pin state is \"Pressed \". Will check input pin state again in 20ms "<<endl;
       usleep(20000);
       cout << "Checking again ....." << endl;
       gpioIn->getval_gpio(inputstate); // checking again to ensure that state "0" is due to button press and not noise
@@ -55,9 +55,11 @@ int main(int argc, char **argv){
       else{
           cout << "input pin state is definitely \"UnPressed\". That was just noise." <<endl;
       }
+    }else{
+      gpioOut->setval_gpio("0");
     }
-    gpioOut->setval_gpio("0");
   }
+
   cout << "Exiting....." << endl;
   gpioOut->unexport_gpio();
   gpioIn->unexport_gpio();
