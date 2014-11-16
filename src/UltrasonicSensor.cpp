@@ -1,4 +1,5 @@
 #include <we_autobot/UltrasonicSensor.h>
+#include <time.h>
 
 //int testGPIO(int inpin, int outpin){
 int main(int argc, char **argv){
@@ -48,6 +49,27 @@ int main(int argc, char **argv){
         cout << " Waiting until pin is unpressed....." << endl;
         while (inputstate == "0"){ 
           gpioIn->getval_gpio(inputstate);
+          // WHILE HOLD, TEST ULTRA SOUND
+          
+          // turn off trigger
+          gpioTrig->setval_gpio("0");
+          usleep(200000); //sleep for 0.2s
+
+          // set trigger for 10us
+          gpioTrig->setval_gpio("1");
+          usleep(10);
+          gpioTrig->setval_gpio("0");
+
+          time_t pulse_start;
+          time_t pulse_end;
+          while (usstate == "0"){
+            pulse_start = time();
+          }
+          while (usstate == "1"){
+            pulse_start = time();
+          }
+
+          cout << "Distance is "<< (pulse_end - pulse_start) * 17150 << endl;
         };
         cout << "pin is unpressed" << endl;
         kill = 0;
