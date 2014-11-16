@@ -63,10 +63,10 @@ int main(int argc, char **argv){
           time_t pulse_start;
           time_t pulse_end;
           while (usstate == "0"){
-            pulse_start = time();
+            time(&pulse_start);
           }
           while (usstate == "1"){
-            pulse_start = time();
+            time(&pulse_end);
           }
 
           cout << "Distance is "<< (pulse_end - pulse_start) * 17150 << endl;
