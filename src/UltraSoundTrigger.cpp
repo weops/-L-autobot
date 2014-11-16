@@ -45,7 +45,7 @@ int main(int argc, char **argv){
           // turn off trigger
           cout << " >> Settling Trigger....." << endl;
           gpioTrig->setval_gpio("0");
-          usleep(20000); //sleep for 0.2s
+          usleep(200000); //sleep for 0.2s
 
           // set trigger for 10us
           cout << " >> Pulse Trigger for 10us" << endl;
@@ -53,7 +53,7 @@ int main(int argc, char **argv){
           usleep(10);
           gpioTrig->setval_gpio("0");
 
-          usleep(20000);
+          usleep(200000);
           gpioIn->getval_gpio(inputstate);
           // WHILE HOLD, TEST ULTRA SOUND
         };
