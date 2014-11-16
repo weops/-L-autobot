@@ -5,12 +5,13 @@
 int main(int argc, char **argv){
   ros::init( argc, argv, "usEcho" );
   ros::NodeHandle n;
-
+  
+  // PIN DESC
   // GPIO 22: Rear  Middle
   // GPIO 6 : Front Right
   // GPIO 19: Front Left
 
-  GPIOClass* gpioRM = new GPIOClass("27");
+  GPIOClass* gpioRM = new GPIOClass("27"); //TODO: CHANGE THIS PIN TO MATCH DESC ABOVE
   GPIOClass* gpioFR = new GPIOClass("6");
   GPIOClass* gpioFL = new GPIOClass("19");
   gpioRM->export_gpio();
@@ -36,7 +37,8 @@ int main(int argc, char **argv){
     // cout << " >> Waiting Echo  : "<< usstate << endl;
     if (rmState == "0" && rmEnd.tv_usec > rmStart.tv_usec){
       rmD = (rmEnd.tv_usec - rmStart.tv_usec) * 0.00001 * 171.5;
-      cout << "Distance is "<< rmD << endl;
+      //cout << "Distance is "<< rmD << endl;
+      //TODO: BC if reading fall under 10
       gettimeofday(&rmStart, NULL);
     }else if (rmState == "0"){
       gettimeofday(&rmStart, NULL);
@@ -47,6 +49,7 @@ int main(int argc, char **argv){
     if (frState == "0" && frEnd.tv_usec > frStart.tv_usec){
       frD = (frEnd.tv_usec - frStart.tv_usec) * 0.00001 * 171.5;
       //cout << "Distance is "<< frD << endl;
+      //TODO: BC if reading fall under ???
       gettimeofday(&frStart, NULL);
     }else if (frState == "0"){
       gettimeofday(&frStart, NULL);
@@ -56,6 +59,7 @@ int main(int argc, char **argv){
     if (flState == "0" && flEnd.tv_usec > flStart.tv_usec){
       flD = (flEnd.tv_usec - flStart.tv_usec) * 0.00001 * 171.5;
       //cout << "Distance is "<< flD << endl;
+      //TODO: BC if reading fall under ???
       gettimeofday(&flStart, NULL);
     }else if (flState == "0"){
       gettimeofday(&flStart, NULL);
