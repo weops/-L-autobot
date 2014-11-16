@@ -5,15 +5,22 @@ int main(int argc, char **argv){
   ros::init( argc, argv, "testUltraSense" );
   ros::NodeHandle n;
 
-  string in = "22";
-  string out = "7";
+  string in = "22"; //button
+  string out = "7"; //led
   string inputstate;
   GPIOClass* gpioOut = new GPIOClass(in); //create new GPIO object to be attached to  GPIO22
-  GPIOClass* gpioIn = new GPIOClass(out); //create new GPIO object to be attached to  GPIO27
-
+  GPIOClass* gpioIn = new GPIOClass(out); //create new GPIO object to be attached to  GPIO7
   gpioOut->export_gpio(); //export GPIO22
-  gpioIn->export_gpio(); //export GPIO27
+  gpioIn->export_gpio(); //export GPIO7
 
+  string trig = "17"; //trigger
+  string echo = "27";    //echo
+  string trigstate;
+  GPIOClass* gpioTrig = new GPIOClass(trig); //create new GPIO object to be attached to  GPIO17
+  GPIOClass* gpioEcho = new GPIOClass(echo); //create new GPIO object to be attached to  GPIO27
+  gpioTrig->export_gpio(); //export GPIO17
+  gpioEcho->export_gpio(); //export GPIO27
+  
   cout << " GPIO pins exported" << endl;
 
   gpioOut->setdir_gpio("out"); //GPIO22 set to output
